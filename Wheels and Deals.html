@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wheels and Deals</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#e9ecef;--card:#fff;--ink:#1c2126;--mut:#5c6772;--line:#d0d6dc;--dem:#c2410c;--sup:#1e5fa8;--acc:#f0a800;--up:#b42318;--down:#15803d;--hero:#20262c;--grain:rgba(0,0,0,.05)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12161a;--card:#1b2127;--ink:#e6eaee;--mut:#98a4af;--line:#2c343b;--dem:#f28a55;--sup:#6cabea;--up:#f87171;--down:#4ade80;--hero:#0e1216;--grain:rgba(255,255,255,.035)}}
+:root[data-theme="dark"]{--bg:#12161a;--card:#1b2127;--ink:#e6eaee;--mut:#98a4af;--line:#2c343b;--dem:#f28a55;--sup:#6cabea;--up:#f87171;--down:#4ade80;--hero:#0e1216;--grain:rgba(255,255,255,.035)}
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--bg);background-image:radial-gradient(var(--grain) 1px,transparent 1px);background-size:7px 7px;color:var(--ink);font-family:"Segoe UI",system-ui,Arial,sans-serif;line-height:1.45}
+.wm{position:fixed;right:-60px;bottom:-40px;width:560px;color:var(--ink);opacity:.05;pointer-events:none;z-index:0}
+.wrap{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:14px}
+.top{position:relative;display:flex;align-items:center;gap:14px;background:var(--hero);color:#fff;border-radius:12px;padding:16px 18px 20px;margin-bottom:14px;overflow:hidden}
+.top::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:3px;background:repeating-linear-gradient(90deg,var(--acc) 0 14px,transparent 14px 26px)}
+.top svg{width:56px;height:32px;flex:none;color:#fff}
+.top h1{margin:0;font-size:1.55rem;letter-spacing:.01em}
+.top p{margin:0;color:#aab5bf;font-size:.9rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+h2{font-size:.95rem;margin:0 0 10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+.hero{background:var(--hero);border-radius:12px;overflow:hidden;margin-bottom:14px;border:1px solid var(--line)}
+.hero svg.scn{display:block;width:100%;max-height:360px;margin:0 auto}
+.cap{padding:12px 16px;border-top:1px solid #2c343b}
+.cap b{font-size:1.1rem;color:#e6eaee}
+.cap div{color:#a6b2bd;font-size:.92rem}
+.hero.up .cap b{color:#ff8a80}.hero.down .cap b{color:#6ee7a0}
+.g-side,.g-up,.g-down,.g-flat{display:none}
+.hero.up .g-side,.hero.flat .g-side,.hero.up .g-up,.hero.down .g-down,.hero.flat .g-flat{display:block}
+.grid{display:grid;gap:14px}
+.col{display:contents}
+.o1{order:1}.o2{order:2}.o3{order:3}.o4{order:4}.o5{order:5}
+@media(min-width:880px){.grid{grid-template-columns:1fr 1fr;align-items:start}.col{display:flex;flex-direction:column;gap:14px}.col.r{position:sticky;top:12px}}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg button{display:flex;align-items:center;gap:10px;font:inherit;text-align:left;padding:10px 12px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;cursor:pointer}
+.seg button svg{width:44px;height:26px;flex:none}
+.seg button small{display:block;color:var(--mut);font-size:.78rem}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+.seg button[aria-pressed="true"] small{color:var(--card);opacity:.75}
+button:focus-visible,input:focus-visible{outline:3px solid var(--sup);outline-offset:2px}
+.note{font-size:.84rem;color:var(--mut);margin:8px 0 0}
+.pre{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.pre button{font:inherit;font-size:.84rem;padding:6px 11px;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;cursor:pointer}
+.pre button:hover{border-color:var(--ink)}
+.dc{border-top:4px solid var(--dem);--thumb:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 30'%3E%3Cpath d='M2 22V17q0-3 4-4l9-2 6-7q1-1 3-1h10q2 0 3 1l7 7 6 1q2 1 2 4v6z' fill='%23c2410c'/%3E%3Cpath d='M22 11l4-6h7v6zM35 11V5h3l5 6z' fill='%23dbeafe'/%3E%3Ccircle cx='14' cy='22' r='6' fill='%2314181c'/%3E%3Ccircle cx='40' cy='22' r='6' fill='%2314181c'/%3E%3Ccircle cx='14' cy='22' r='2.5' fill='%23cbd5e1'/%3E%3Ccircle cx='40' cy='22' r='2.5' fill='%23cbd5e1'/%3E%3C/svg%3E")}
+.sc{border-top:4px solid var(--sup);--thumb:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 30'%3E%3Cpath d='M2 22V17q0-3 4-4l9-2 6-7q1-1 3-1h10q2 0 3 1l7 7 6 1q2 1 2 4v6z' fill='%231e5fa8'/%3E%3Cpath d='M22 11l4-6h7v6zM35 11V5h3l5 6z' fill='%23dbeafe'/%3E%3Ccircle cx='14' cy='22' r='6' fill='%2314181c'/%3E%3Ccircle cx='40' cy='22' r='6' fill='%2314181c'/%3E%3Ccircle cx='14' cy='22' r='2.5' fill='%23cbd5e1'/%3E%3Ccircle cx='40' cy='22' r='2.5' fill='%23cbd5e1'/%3E%3C/svg%3E")}
+.sl{margin:10px 0 14px}
+.sl label{display:flex;justify-content:space-between;gap:8px;font-size:.92rem}
+.sl b{font-variant-numeric:tabular-nums}
+.sl small{color:var(--mut);display:block;font-size:.78rem}
+.sl input{width:100%;-webkit-appearance:none;appearance:none;height:34px;background:transparent;margin:2px 0}
+.sl input::-webkit-slider-runnable-track{height:12px;border-radius:6px;background:repeating-linear-gradient(90deg,#f0a800 0 9px,transparent 9px 19px) center/100% 2px no-repeat,#3a4148}
+.sl input::-moz-range-track{height:12px;border-radius:6px;background:repeating-linear-gradient(90deg,#f0a800 0 9px,transparent 9px 19px) center/100% 2px no-repeat,#3a4148}
+.sl input::-webkit-slider-thumb{-webkit-appearance:none;width:52px;height:30px;margin-top:-9px;border:0;background:var(--thumb) center/contain no-repeat}
+.sl input::-moz-range-thumb{width:52px;height:30px;border:0;border-radius:0;background:var(--thumb) center/contain no-repeat}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{border:1px solid var(--line);border-radius:10px;padding:10px}
+.stat span{font-size:.78rem;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}
+.stat div{font-size:1.25rem;font-weight:700;font-variant-numeric:tabular-nums}
+.stat em{font-style:normal;font-size:.85rem}
+.up{color:var(--up)}.down{color:var(--down)}
+.lot{display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:12px}
+.lot svg{width:32px;height:19px}
+.lot .k{color:var(--ink);opacity:.85}.lot .n{color:var(--acc)}.lot .l{color:var(--up);opacity:.4}.lot .g{color:var(--ink);opacity:.08}
+#why{font-size:.92rem;margin:10px 0 0}
+.chartbox{overflow-x:auto}
+svg text{fill:var(--mut);font-size:11px;font-family:inherit}
+/* animations */
+.hero.up .c1{transform-origin:0 0;animation:crash1 3s ease-in infinite}
+.hero.up .c2{transform-origin:0 0;animation:crash2 3s ease-in infinite}
+.hero.up .boom{transform-box:fill-box;transform-origin:center;animation:boom 3s ease-out infinite}
+.hero.up .smoke{transform-box:fill-box;transform-origin:center;animation:smoke 3s ease-out infinite}
+.hero.down .dcar{transform-origin:0 0;animation:drift 2.8s ease-in-out infinite alternate}
+.hero.down .puff{transform-box:fill-box;transform-origin:center;animation:puff .7s ease-out infinite}
+@keyframes crash1{0%{transform:translate(-70px,205px)}30%{transform:translate(178px,205px)}34%{transform:translate(168px,203px) rotate(-4deg)}48%,90%{transform:translate(142px,201px) rotate(-9deg)}100%{transform:translate(-70px,205px)}}
+@keyframes crash2{0%{transform:translate(550px,205px) scale(-1,1)}30%{transform:translate(302px,205px) scale(-1,1)}34%{transform:translate(312px,203px) scale(-1,1) rotate(-4deg)}48%,90%{transform:translate(338px,201px) scale(-1,1) rotate(-9deg)}100%{transform:translate(550px,205px) scale(-1,1)}}
+@keyframes boom{0%,29%{opacity:0;transform:scale(.2)}33%{opacity:1;transform:scale(1.2)}55%{opacity:1;transform:scale(1)}72%,100%{opacity:0;transform:scale(1.4)}}
+@keyframes smoke{0%,32%{opacity:0;transform:translateY(0) scale(.4)}45%{opacity:.7}100%{opacity:0;transform:translateY(-45px) scale(1.9)}}
+@keyframes drift{0%{transform:translate(110px,150px) rotate(-12deg) scale(1.4)}30%{transform:translate(200px,112px) rotate(-38deg) scale(1.4)}65%{transform:translate(310px,140px) rotate(24deg) scale(1.4)}100%{transform:translate(390px,105px) rotate(-8deg) scale(1.4)}}
+@keyframes puff{0%{opacity:.85;transform:scale(.4)}100%{opacity:0;transform:scale(2)}}
+@media(prefers-reduced-motion:reduce){.hero .c1,.hero .c2,.hero .boom,.hero .smoke,.hero .dcar,.hero .puff{animation:none!important}
+.hero.up .c1{transform:translate(142px,201px) rotate(-9deg)}.hero.up .c2{transform:translate(338px,201px) scale(-1,1) rotate(-9deg)}.hero.up .boom{opacity:1}.hero.up .smoke{opacity:0}
+.hero.down .dcar{transform:translate(240px,130px) rotate(-20deg) scale(1.4)}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-new" viewBox="0 0 52 30"><path d="M2 22V17q0-3 4-4l9-2 6-7q1-1 3-1h10q2 0 3 1l7 7 6 1q2 1 2 4v6z" fill="currentColor"/><path d="M22 11l4-6h7v6zM35 11V5h3l5 6z" fill="var(--card)"/><circle cx="14" cy="22" r="6" fill="currentColor" stroke="var(--card)" stroke-width="2"/><circle cx="40" cy="22" r="6" fill="currentColor" stroke="var(--card)" stroke-width="2"/></symbol>
+<symbol id="i-old" viewBox="0 0 52 30"><path d="M2 22V14q0-2 3-2h7l4-8h22l5 8h6q3 0 3 2v8z" fill="currentColor"/><path d="M18 12l3-6h8v6zM31 12V6h6l3 6z" fill="var(--card)"/><circle cx="14" cy="22" r="6" fill="currentColor" stroke="var(--card)" stroke-width="2"/><circle cx="40" cy="22" r="6" fill="currentColor" stroke="var(--card)" stroke-width="2"/></symbol>
+<g id="car"><ellipse cx="0" cy="0" rx="64" ry="4" fill="rgba(0,0,0,.4)"/><path d="M-60 -12V-26q0-6 14-8l16-2 12-16q2-2 6-2h34q6 0 10 4l12 14 12 2q6 2 6 8v14z" fill="currentColor"/><path d="M-14 -50l-10 13h26v-13zM8 -50v13h28l-9-12z" fill="#cfe3f3"/><path d="M-4 -36V-14" stroke="rgba(0,0,0,.25)" stroke-width="1.5" fill="none"/><circle cx="-36" cy="-13" r="13" fill="#14181c"/><circle cx="36" cy="-13" r="13" fill="#14181c"/><circle cx="-36" cy="-13" r="6" fill="#aab4be"/><circle cx="36" cy="-13" r="6" fill="#aab4be"/><rect x="56" y="-29" width="7" height="5" rx="1" fill="#ffe58a"/><rect x="-63" y="-29" width="4" height="6" rx="1" fill="#e04848"/></g>
+<g id="carTop"><rect x="-45" y="-20" width="90" height="40" rx="14" fill="currentColor"/><rect x="-24" y="-14" width="32" height="28" rx="5" fill="rgba(0,0,0,.2)"/><polygon points="8,-15 22,-11 22,11 8,15" fill="#bcd6ea"/><polygon points="-26,-13 -31,-10 -31,10 -26,13" fill="#bcd6ea"/><rect x="41" y="-16" width="4" height="8" fill="#ffe58a"/><rect x="41" y="8" width="4" height="8" fill="#ffe58a"/><rect x="-46" y="-16" width="3" height="8" fill="#e04848"/><rect x="-46" y="8" width="3" height="8" fill="#e04848"/><rect x="-34" y="-24" width="16" height="6" rx="2" fill="#111"/><rect x="-34" y="18" width="16" height="6" rx="2" fill="#111"/><rect x="18" y="-24" width="16" height="6" rx="2" fill="#111"/><rect x="18" y="18" width="16" height="6" rx="2" fill="#111"/></g>
+</defs></svg>
+<div class="wm" aria-hidden="true"><svg viewBox="0 0 52 30"><use href="#i-new"/></svg></div>
+
+<div class="wrap">
+<header class="top">
+<svg viewBox="0 0 52 30" aria-hidden="true"><use href="#i-new"/></svg>
+<div><h1>Wheels and Deals</h1><p>Car market supply and demand simulator. Prices in PKR.</p></div>
+</header>
+
+<section class="hero flat" id="scene" role="status" aria-live="polite">
+<svg class="scn" viewBox="0 0 480 260" role="img" aria-label="Market animation">
+<rect width="480" height="260" fill="#1a2026"/>
+<g class="g-side">
+<path d="M0 190V150h30v-20h24v30h20v-40h28v40h26v-25h22v25h30v-45h26v45h24v-30h30v30h28v-20h30v20h32V190z" fill="#232a31"/>
+<rect y="190" width="480" height="70" fill="#2b3138"/>
+<line x1="0" y1="190" x2="480" y2="190" stroke="#3d454d" stroke-width="2"/>
+<line x1="0" y1="236" x2="480" y2="236" stroke="#f0a800" stroke-width="3" stroke-dasharray="22 16" opacity=".8"/>
+</g>
+<g class="g-flat"><use href="#car" transform="translate(240,215)" style="color:#7d8894"/></g>
+<g class="g-up">
+<g class="c1"><use href="#car" style="color:#c2410c"/></g>
+<g class="c2"><use href="#car" style="color:#3b82c4"/></g>
+<circle class="smoke" cx="222" cy="150" r="14" fill="#9aa5af"/><circle class="smoke" cx="262" cy="145" r="12" fill="#7d8894" style="animation-delay:.15s"/>
+<polygon class="boom" id="bStar" points="" fill="#f0a800" stroke="#b42318" stroke-width="3"/>
+<text class="boom" x="240" y="86" text-anchor="middle" style="font-size:30px;font-weight:800;fill:#f0a800;letter-spacing:.06em">CRASH!</text>
+</g>
+<g class="g-down">
+<rect width="480" height="260" fill="#2b3138"/>
+<line x1="0" y1="28" x2="480" y2="28" stroke="#e6eaee" stroke-width="3" opacity=".5"/>
+<line x1="0" y1="232" x2="480" y2="232" stroke="#e6eaee" stroke-width="3" opacity=".5"/>
+<line x1="0" y1="130" x2="480" y2="130" stroke="#f0a800" stroke-width="3" stroke-dasharray="24 18" opacity=".7"/>
+<path d="M20 170C120 150 170 110 250 128S380 150 450 96" stroke="#0d1013" stroke-width="7" fill="none" opacity=".55"/>
+<path d="M20 190C120 172 170 132 250 150S380 172 450 116" stroke="#0d1013" stroke-width="7" fill="none" opacity=".4"/>
+<g class="dcar"><circle class="puff" cx="-58" cy="-14" r="10" fill="#e5e7eb"/><circle class="puff" cx="-62" cy="14" r="10" fill="#d1d5db" style="animation-delay:.3s"/><use href="#carTop" style="color:#c2410c"/></g>
+</g>
+</svg>
+<div class="cap"><b id="capT">Market at baseline</b><div id="capS">Move a shifter or pick a scenario to see how prices react.</div></div>
+</section>
+
+<div class="grid">
+<div class="col l">
+<div class="card o1">
+<h2>Type of good</h2>
+<div class="seg" id="typeSeg">
+<button data-t="normal" aria-pressed="true"><svg><use href="#i-new"/></svg><span>Normal good<small>New cars</small></span></button>
+<button data-t="inferior" aria-pressed="false"><svg><use href="#i-old"/></svg><span>Inferior good<small>Old and used cars</small></span></button>
+</div>
+<p class="note" id="typeNote"></p>
+<div class="pre" id="pre"></div>
+</div>
+<div class="card dc o4"><h2>Demand shifters (buyers)</h2><div id="dSl"></div></div>
+<div class="card sc o5"><h2>Supply shifters (sellers)</h2><div id="sSl"></div></div>
+</div>
+<div class="col r">
+<div class="card o2">
+<h2>Market result</h2>
+<div class="stats">
+<div class="stat"><span>Equilibrium price</span><div id="pr"></div><em id="prc"></em></div>
+<div class="stat"><span>Equilibrium quantity</span><div id="qt"></div><em id="qtc"></em></div>
+</div>
+<div class="lot" id="lot" aria-hidden="true"></div>
+<p class="note">Each car icon is 10,000 cars sold. Gold icons are extra sales, red icons are lost sales.</p>
+<p id="why"></p>
+</div>
+<div class="card o3">
+<h2>Supply and demand</h2>
+<div class="chartbox"><svg id="ch" viewBox="0 0 460 340" width="100%" role="img" aria-label="Supply and demand chart"></svg></div>
+<p class="note">Dashed lines and the ring show the starting market. Solid lines and the car show the market after your changes, with the car parked at the equilibrium. Price in PKR millions, quantity in thousand cars.</p>
+</div>
+</div>
+</div>
+</div>
+<script>
+var b=30,d=30,A0=200,C0=-10,PMAX=8,QMAX=260,type='normal';
+function star(cx,cy,ro,ri,n){var p=[];for(var i=0;i<n*2;i++){var r=i%2?ri:ro,a=Math.PI*i/n-Math.PI/2;p.push((cx+r*Math.cos(a)).toFixed(1)+','+(cy+r*Math.sin(a)).toFixed(1))}return p.join(' ')}
+var demand=[
+ {k:'inc',n:'Consumer income',h:function(){return type==='normal'?'Normal good: more income raises demand':'Inferior good: more income lowers demand'},s:function(){return type==='normal'?1:-1}},
+ {k:'sub',n:'Price of substitutes (bikes, ride-hailing)',h:function(){return 'Substitutes get dearer: more people buy cars'},s:function(){return 1}},
+ {k:'com',n:'Price of complements (petrol, insurance)',h:function(){return 'Petrol gets dearer: fewer people buy cars'},s:function(){return -1}},
+ {k:'tas',n:'Tastes and preferences',h:function(){return 'Cars become more fashionable'},s:function(){return 1}},
+ {k:'pop',n:'Number of buyers (population)',h:function(){return 'More buyers in the market'},s:function(){return 1}},
+ {k:'exp',n:'Expected future price',h:function(){return 'Buyers expect prices to rise, so they buy now'},s:function(){return 1}}
+];
+var supply=[
+ {k:'inp',n:'Input costs (steel, wages)',h:'Costs rise: supply falls',s:-1},
+ {k:'fx',n:'PKR depreciation (imported parts)',h:'Weaker rupee makes parts dearer: supply falls',s:-1},
+ {k:'tax',n:'Taxes / import duty (negative = subsidy)',h:'Higher duty: supply falls',s:-1},
+ {k:'tec',n:'Technology / productivity',h:'Better technology: supply rises',s:1},
+ {k:'sel',n:'Number of sellers (new assemblers)',h:'More firms enter: supply rises',s:1}
+];
+var val={};demand.concat(supply).forEach(function(x){val[x.k]=0});
+var presets=[['Income boom',{inc:25}],['Petrol price spike',{com:30}],['Import duty hike',{tax:25,fx:10}],['New assembler plant',{sel:30,tec:10}],['Reset',null]];
+function el(i){return document.getElementById(i)}
+function fmtP(p){return 'PKR '+Math.round(p*1e6).toLocaleString('en-PK')}
+function calc(v){var ds=0,ss=0;demand.forEach(function(x){ds+=x.s()*v[x.k]});supply.forEach(function(x){ss+=x.s*v[x.k]});
+ var A=A0*(1+ds/100),C=C0+A0*ss/100*0.6,P=(A-C)/(b+d);return{A:A,C:C,P:P,Q:A-b*P}}
+function build(box,arr){var h='';arr.forEach(function(x){h+='<div class="sl"><label for="s_'+x.k+'"><span>'+x.n+'</span><b id="v_'+x.k+'">0%</b></label><input type="range" id="s_'+x.k+'" min="-40" max="40" step="1" value="0" data-k="'+x.k+'"><small id="h_'+x.k+'"></small></div>'});el(box).innerHTML=h}
+function hints(){demand.forEach(function(x){el('h_'+x.k).textContent=x.h()});supply.forEach(function(x){el('h_'+x.k).textContent=x.h})}
+function sign(n){return(n>0?'+':'')+n+'%'}
+var base=calc(val);
+function lot(c){var ic=type==='normal'?'i-new':'i-old',nb=Math.round(base.Q/10),n=Math.max(0,Math.round(c.Q/10)),h='';
+ for(var i=0;i<20;i++){var k=i<Math.min(n,nb)?'k':(i<n?'n':(i<nb?'l':'g'));h+='<svg class="'+k+'" viewBox="0 0 52 30"><use href="#'+ic+'"/></svg>'}el('lot').innerHTML=h}
+function chart(bs,cur){
+ var W=460,H=340,L=46,R=12,T=12,B=40,pw=W-L-R,ph=H-T-B;
+ function X(q){return L+q/QMAX*pw}function Y(p){return T+ph-p/PMAX*ph}
+ function line(A,s,col,dash){var pts=[];for(var i=0;i<=1;i++){var p=i*PMAX,q=s>0?(A+d*p):(A-b*p);pts.push(X(q)+','+Y(p))}
+  return '<polyline points="'+pts.join(' ')+'" fill="none" stroke="'+col+'" stroke-width="'+(dash?2:3.5)+'" '+(dash?'stroke-dasharray="6 5" opacity=".55"':'')+' clip-path="url(#cp)"/>'}
+ var g='<defs><clipPath id="cp"><rect x="'+L+'" y="'+T+'" width="'+pw+'" height="'+ph+'"/></clipPath></defs>';
+ for(var p=0;p<=PMAX;p+=2)g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(p)+'" y2="'+Y(p)+'" stroke="var(--line)"/><text x="'+(L-6)+'" y="'+(Y(p)+4)+'" text-anchor="end">'+p+'M</text>';
+ for(var q=0;q<=250;q+=50)g+='<line y1="'+T+'" y2="'+(T+ph)+'" x1="'+X(q)+'" x2="'+X(q)+'" stroke="var(--line)"/><text x="'+X(q)+'" y="'+(H-22)+'" text-anchor="middle">'+q+'</text>';
+ g+='<text x="'+(L+pw/2)+'" y="'+(H-6)+'" text-anchor="middle">Quantity (thousand cars)</text><text x="12" y="'+(T+ph/2)+'" transform="rotate(-90 12 '+(T+ph/2)+')" text-anchor="middle">Price (PKR millions)</text>';
+ g+=line(bs.A,-1,'var(--dem)',1)+line(bs.C,1,'var(--sup)',1)+line(cur.A,-1,'var(--dem)',0)+line(cur.C,1,'var(--sup)',0);
+ g+='<text x="'+X(bs.A-b*0.6)+'" y="'+(Y(0.6)-6)+'" style="fill:var(--dem);font-weight:700">D</text><text x="'+X(cur.C+d*7.6)+'" y="'+(Y(7.6)+14)+'" style="fill:var(--sup);font-weight:700">S</text>';
+ g+='<circle cx="'+X(bs.Q)+'" cy="'+Y(bs.P)+'" r="6" fill="none" stroke="var(--mut)" stroke-dasharray="2 2"/>';
+ if(cur.Q>0){var cx=X(cur.Q),cy=Y(cur.P);
+  g+='<line x1="'+L+'" x2="'+cx+'" y1="'+cy+'" y2="'+cy+'" stroke="var(--ink)" stroke-dasharray="3 3" opacity=".6"/><line y1="'+cy+'" y2="'+(T+ph)+'" x1="'+cx+'" x2="'+cx+'" stroke="var(--ink)" stroke-dasharray="3 3" opacity=".6"/>';
+  g+='<use href="#'+(type==='normal'?'i-new':'i-old')+'" x="'+(cx-21)+'" y="'+(cy-12)+'" width="42" height="24" style="color:var(--acc);filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.65))"/>'}
+ el('ch').innerHTML=g}
+function update(){
+ demand.concat(supply).forEach(function(x){el('v_'+x.k).textContent=sign(val[x.k])});
+ var c=calc(val),dP=(c.P-base.P)/base.P*100,dQ=(c.Q-base.Q)/base.Q*100;
+ el('pr').textContent=fmtP(c.P);el('qt').textContent=Math.max(0,Math.round(c.Q*1000)).toLocaleString('en-PK')+' cars';
+ var pc=el('prc'),qc=el('qtc');
+ pc.textContent=(dP>=0?'+':'')+dP.toFixed(1)+'% vs start';pc.className=dP>0.05?'up':dP<-0.05?'down':'';
+ qc.textContent=(dQ>=0?'+':'')+dQ.toFixed(1)+'% vs start';qc.className=dQ>0.05?'down':dQ<-0.05?'up':'';
+ var ds=0,ss=0;demand.forEach(function(x){ds+=x.s()*val[x.k]});supply.forEach(function(x){ss+=x.s*val[x.k]});
+ var t;
+ if(Math.abs(ds)<0.5&&Math.abs(ss)<0.5)t='No shifters changed, so the market stays at its starting equilibrium.';
+ else{t='Demand '+(ds>0.5?'increases (shifts right)':ds<-0.5?'decreases (shifts left)':'is unchanged')+' and supply '+(ss>0.5?'increases (shifts right)':ss<-0.5?'decreases (shifts left)':'is unchanged')+'. ';
+  t+='Price '+(dP>0.05?'rises':dP<-0.05?'falls':'stays about the same')+' and quantity '+(dQ>0.05?'rises':dQ<-0.05?'falls':'stays about the same')+'.';
+  if(ds*ss!==0&&((ds>0&&ss>0)||(ds<0&&ss<0)))t+=' Both curves moved the same way, so the price effect depends on which shift is bigger.'}
+ if(c.Q<=0)t+=' Warning: the market has collapsed, no cars trade at any price.';
+ el('why').textContent=t;
+ var st=dP>0.5?'up':dP<-0.5?'down':'flat';
+ el('scene').className='hero '+st;
+ if(st==='up'){el('capT').textContent='Prices are going up';el('capS').textContent='Cars now cost '+fmtP(c.P)+', up '+dP.toFixed(1)+'% from '+fmtP(base.P)+'.'}
+ else if(st==='down'){el('capT').textContent='Prices are going down';el('capS').textContent='Cars now cost '+fmtP(c.P)+', down '+Math.abs(dP).toFixed(1)+'% from '+fmtP(base.P)+'.'}
+ else{el('capT').textContent='Market at baseline';el('capS').textContent='Move a shifter or pick a scenario to see how prices react.'}
+ lot(c);chart(base,c)}
+function setType(t){type=t;var bs=el('typeSeg').querySelectorAll('button');
+ for(var i=0;i<bs.length;i++)bs[i].setAttribute('aria-pressed',bs[i].getAttribute('data-t')===t?'true':'false');
+ el('typeNote').textContent=t==='normal'?'Normal good: demand rises when income rises (new cars, higher-end models).':'Inferior good: demand falls when income rises, because richer buyers switch to new cars.';
+ hints();update()}
+build('dSl',demand);build('sSl',supply);
+var pb='';presets.forEach(function(p,i){pb+='<button data-i="'+i+'">'+p[0]+'</button>'});el('pre').innerHTML=pb;
+el('bStar').setAttribute('points',star(240,168,60,30,10));
+document.addEventListener('input',function(e){var k=e.target.getAttribute&&e.target.getAttribute('data-k');if(k){val[k]=+e.target.value;update()}});
+document.addEventListener('click',function(e){
+ var tb=e.target.closest&&e.target.closest('[data-t]');if(tb){setType(tb.getAttribute('data-t'));return}
+ var pbn=e.target.closest&&e.target.closest('[data-i]');
+ if(pbn){Object.keys(val).forEach(function(k){val[k]=0});var p=presets[+pbn.getAttribute('data-i')][1];
+  if(p)Object.keys(p).forEach(function(k){val[k]=p[k]});
+  Object.keys(val).forEach(function(k){el('s_'+k).value=val[k]});update()}});
+setType('normal');
+</script>
+</body>
+</html>
